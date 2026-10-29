@@ -14,14 +14,13 @@ keeps a bounded query history in the current Streamlit session.
 
 ## Run locally
 
-From this directory, in PowerShell:
+From this directory, in PowerShell (no activation script required):
 
 ```powershell
 py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-py -m pip install -r requirements.txt
 $env:OPENAI_API_KEY = "your-api-key"
-py -m streamlit run streamlit_app.py
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m streamlit run streamlit_app.py
 ```
 
 Alternatively, create `.streamlit/secrets.toml`:
@@ -53,6 +52,9 @@ is valid and that the configured model is available to your account.
 - Prompts, generated SQL, result values, and API keys are not written to logs.
 - Query history is limited to 50 entries and held only in Streamlit session
   state; it is not persisted to the database.
+
+The interface includes light and dark themes, database and query metrics,
+starter questions, a schema browser, SQL preview, result tables, and CSV export.
 
 ## Tests
 
