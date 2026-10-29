@@ -11,3 +11,4 @@ htmlcov/
 *.sqlite
 *.sqlite3
 *.log
+../DB_INSIGHT/
