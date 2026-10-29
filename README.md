@@ -64,3 +64,34 @@ The insert script contains 5 departments, 20 employees, 10 projects, and 30 empl
 
 - [01_create_tables.sql](./01_create_tables.sql) — creates all four tables and their primary key, foreign key, unique, and check constraints.
 - [02_insert_sample_data.sql](./02_insert_sample_data.sql) — inserts the sample records in foreign-key-safe order.
+- [build_sqlite_db.py](./build_sqlite_db.py) — builds or validates the SQLite database using Python's standard library.
+- [employee_management.db](./employee_management.db) — populated SQLite database created from the scripts above.
+
+## Build and access the SQLite database
+
+From this folder, build the database (or validate it if it already exists):
+
+```powershell
+py build_sqlite_db.py
+```
+
+To deliberately recreate the database from the SQL scripts:
+
+```powershell
+py build_sqlite_db.py --force
+```
+
+The `--force` option replaces the database file, so back up any data you want to keep. To choose another output file, pass `--database "C:\path\to\employee_management.db"`.
+
+The `.db` file is a binary database, not a text file. Open it with a SQLite viewer, such as the SQLite extension in VS Code or DB Browser for SQLite. To access it from Python:
+
+```python
+import sqlite3
+
+connection = sqlite3.connect("employee_management.db")
+try:
+    for row in connection.execute("SELECT employee_id, first_name, last_name FROM EMPLOYEES"):
+        print(row)
+finally:
+    connection.close()
+```
